@@ -82,6 +82,12 @@ class ViewController: UIViewController {
     heading.center.x -= view.bounds.width
     username.center.x -= view.bounds.width
     password.center.x -= view.bounds.width
+    
+    // 1. Challenges: 애니메이션을 적용할 이미지들의 alpha 값에 0.0
+    cloud1.alpha = 0.0
+    cloud2.alpha = 0.0
+    cloud3.alpha = 0.0
+    cloud4.alpha = 0.0
   }
   
   override func viewDidAppear(_ animated: Bool) {
@@ -98,6 +104,23 @@ class ViewController: UIViewController {
     
     UIView.animate(withDuration: 0.5, delay: 0.4, options: [], animations: {
         self.password.center.x += self.view.bounds.width
+    })
+    
+    // 2. Challenges: 구름마다 duration 0.5, delay 0.5, 0.7, 0.9, 0.1 으로 애니메이션 적용
+    UIView.animate(withDuration: 0.5, delay: 0.5, options: [.repeat, .autoreverse, .curveEaseInOut], animations: {
+        self.cloud1.alpha = 1.0
+    })
+    
+    UIView.animate(withDuration: 0.5, delay: 0.7, options: [.repeat, .autoreverse, .curveEaseInOut], animations: {
+        self.cloud2.alpha = 1.0
+    })
+    
+    UIView.animate(withDuration: 0.5, delay: 0.9, options: [.repeat, .autoreverse, .curveEaseInOut], animations: {
+        self.cloud3.alpha = 1.0
+    })
+    
+    UIView.animate(withDuration: 0.5, delay: 1.1, options: [.repeat, .autoreverse, .curveEaseInOut], animations: {
+        self.cloud4.alpha = 1.0
     })
   }
   
