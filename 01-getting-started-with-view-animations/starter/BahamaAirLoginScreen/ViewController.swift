@@ -77,6 +77,24 @@ class ViewController: UIViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
+
+    // 1. 화면상에 애니메이션을 적용할 뷰들을 화면밖으로 이동
+    heading.center.x -= view.bounds.width
+    username.center.x -= view.bounds.width
+    password.center.x -= view.bounds.width
+
+    // 2. 뷰 하나씩 딜레이를 다르게 주어 애니메이션 적용.
+    UIView.animate(withDuration: 0.5) {
+        self.heading.center.x += self.view.bounds.width
+    }
+    
+    UIView.animate(withDuration: 0.5, delay: 0.3, options: [], animations: {
+        self.username.center.x += self.view.bounds.width
+    })
+    
+    UIView.animate(withDuration: 0.5, delay: 0.4, options: [], animations: {
+        self.password.center.x += self.view.bounds.width
+    })
   }
   
   override func viewDidAppear(_ animated: Bool) {
