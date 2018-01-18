@@ -105,22 +105,30 @@ class ViewController: UIViewController {
         UIView.animate(withDuration: 0.5, delay: 0.4, usingSpringWithDamping: 0.6, initialSpringVelocity: 0.0, options: [], animations: {
             self.password.center.x += self.view.bounds.width
         }, completion: nil)
-        
+
         UIView.animate(withDuration: 0.5, delay: 0.5, options: [], animations: {
             self.cloud1.alpha = 1.0
-        }, completion: nil)
-        
+        }, completion: { _ in
+            self.animateCloud(cloud: self.cloud1)
+        })
+
         UIView.animate(withDuration: 0.5, delay: 0.7, options: [], animations: {
             self.cloud2.alpha = 1.0
-        }, completion: nil)
-        
+        }, completion: { _ in
+            self.animateCloud(cloud: self.cloud2)
+        })
+
         UIView.animate(withDuration: 0.5, delay: 0.9, options: [], animations: {
             self.cloud3.alpha = 1.0
-        }, completion: nil)
-        
+        }, completion: { _ in
+            self.animateCloud(cloud: self.cloud3)
+        })
+
         UIView.animate(withDuration: 0.5, delay: 1.1, options: [], animations: {
             self.cloud4.alpha = 1.0
-        }, completion: nil)
+        }, completion: { _ in
+            self.animateCloud(cloud: self.cloud4)
+        })
         
         UIView.animate(withDuration: 0.5, delay: 0.5, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.0,
                        options: [], animations: {
@@ -201,6 +209,17 @@ class ViewController: UIViewController {
                 self.spinner.center = CGPoint(x: 0.0, y: 0.0)
                 self.spinner.alpha = 0.0
             }, completion: nil)
+        })
+    }
+    
+    func animateCloud(cloud: UIImageView) {
+        let cloudSpeed = 60.0 / view.frame.size.width
+        let averageSpeed = (view.frame.size.width - cloud.frame.origin.x) * cloudSpeed
+        UIView.animate(withDuration: TimeInterval(averageSpeed), delay: 0.0, options: .curveLinear, animations: {
+            cloud.frame.origin.x = self.view.frame.size.width
+        }, completion: { _ in
+            cloud.frame.origin.x = -cloud.frame.size.width
+            self.animateCloud(cloud: cloud)
         })
     }
 }
