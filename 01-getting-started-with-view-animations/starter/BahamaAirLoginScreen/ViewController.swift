@@ -92,7 +92,7 @@ class ViewController: UIViewController {
   
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    
+
     // 2. 뷰 하나씩 딜레이를 다르게 주어 애니메이션 적용.
     UIView.animate(withDuration: 0.5) {
         self.heading.center.x += self.view.bounds.width
