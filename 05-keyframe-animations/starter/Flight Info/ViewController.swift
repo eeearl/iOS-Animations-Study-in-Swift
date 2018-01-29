@@ -73,6 +73,23 @@ class ViewController: UIViewController {
   
   //MARK: custom methods
   
+    func summarySwitch(to: String) {
+        let originalCenter = summary.center
+        UIView.animateKeyframes(withDuration: 1.0, delay: 0.0, animations: {
+            
+            UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 0.4) {
+                self.summary.center.y -= 80.0
+            }
+            
+            UIView.addKeyframe(withRelativeStartTime: 0.5, relativeDuration: 0.4) {
+                self.summary.center = originalCenter
+            }
+            
+        }, completion: nil)
+        
+        delay(seconds: 0.5, completion: { self.summary.text = to })
+    }
+    
     func planeDepart() {
         let originalCenter = planeImage.center
         UIView.animateKeyframes(withDuration: 1.5, delay: 0.0,
@@ -106,7 +123,7 @@ class ViewController: UIViewController {
     planeDepart()
     
     // populate the UI with the next flight's data
-    summary.text = data.summary
+    
 
     if animated {
       fade(imageView: bgImageView,
@@ -125,6 +142,8 @@ class ViewController: UIViewController {
       moveLabel(label: arrivingTo, text: data.arrivingTo, offset: offsetArriving)
 
       cubeTransition(label: flightStatus, text: data.flightStatus,  direction: direction)
+        
+        summarySwitch(to: data.summary)
     } else {
       bgImageView.image = UIImage(named: data.weatherImageName)
       snowView.isHidden = !data.showWeatherEffects
@@ -134,6 +153,8 @@ class ViewController: UIViewController {
       departingFrom.text = data.departingFrom
       arrivingTo.text = data.arrivingTo
       flightStatus.text = data.flightStatus
+        
+        summary.text = data.summary
     }
     
     // schedule next flight
